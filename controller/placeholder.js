@@ -228,8 +228,17 @@ function setup(placeholderService, do_geometric_filters_apply, should_execute) {
       return next();
     }
     const initialTime = debugLog.beginTimer(req);
+    const start = Date.now();
 
     placeholderService(req, (err, results) => {
+      const requestTime = Date.now() - start;
+
+      logger.info({
+        time: requestTime,
+        query: req.query,
+        service: 'placeholder',
+      });
+
       if (err) {
         // push err.message or err onto req.errors
         req.errors.push( _.get(err, 'message', err));
