@@ -25,7 +25,7 @@ function sendJSONResponse(req, res, next) {
   if( check.array( geocoding.errors ) && geocoding.errors.length ){
 
     // default status for errors is 400 Bad Request
-    statusCode = 400; // 400 Bad Request
+    statusCode = 500; // 400 Bad Request
 
     // iterate over all reported errors
     geocoding.errors.forEach( function( err ){
